@@ -5,7 +5,7 @@ date: "2/27/2021"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
-    theme: plotly
+
 ---
 
 ```{r setup, include=FALSE}
