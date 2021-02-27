@@ -2,7 +2,10 @@
 title: "What are harpsichords missing?"
 author: "Y.Cheng"
 date: "2/27/2021"
-output: html_document
+output: 
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    theme: plotly
 ---
 
 ```{r setup, include=FALSE}
