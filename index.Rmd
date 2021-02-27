@@ -13,7 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 ### The difference level of DYNAMICS between harpsichord and modern piano
 
-### Why am I a daddy to you, Doggo?
 
 ## R Markdown
 
