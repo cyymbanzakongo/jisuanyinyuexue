@@ -111,11 +111,48 @@ On contrary, their piano counterparts show great difference. The variance in ter
 
 Probably one of the only shared characteristic between the two versions is the pattern of dots. In both graphs the energy is positively proportional to valence. This is probably due to the restraint style of Goldberg Variations itself.
 
+### Dynamic Time Warping
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(spotifyr)
+library(compmus)
+quick.quodlibet <-
+  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+slow.quodlibet <-
+  get_tidy_audio_analysis("1mSUuApLYqohwefANxjN6t") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+compmus_long_distance(
+  quick.quodlibet %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
+  slow.quodlibet %>% mutate(pitches = map(pitches, compmus_normalise, "manhattan")),
+  feature = pitches,
+  method = "euclidean"
+) %>%
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_equal() +
+  labs(x = "Quick", y = "Slow") +
+  theme_minimal() +
+  scale_fill_viridis_c(guide = NULL)
+```
 
 
-
-
-### Self-similarity matrix: Chroma, Timbre, and Temperal
+### Self-similarity matrix: Chroma, Timbre, and more
 
 
 ```{r, echo=FALSE}
@@ -178,6 +215,29 @@ harp.quodlibet %>%
 
 *** 
 Tuning has changed, therefore has to rearrange to the same key.
+
+
+### Tempogram
+```{r, echo=FALSE}
+library(tidyverse)
+library(spotifyr)
+library(compmus)
+
+gamma <-
+  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") 
+
+gamma %>%
+  tempogram(window_size = 8, hop_size = 1, cyclic = FALSE) %>%
+  ggplot(aes(x = time, y = bpm, fill = power)) +
+  geom_raster() +
+  scale_fill_viridis_c(guide = "none") +
+  labs(x = "Time (s)", y = "Tempo (BPM)") +
+  theme_classic()
+
+```
+*** 
+
+Some commentary about Frame 1.
 
 
 
