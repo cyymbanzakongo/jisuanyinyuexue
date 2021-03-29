@@ -117,63 +117,6 @@ Probably one of the only shared characteristic between the two versions is the p
 
 ### Self-similarity matrix: Chroma, Timbre, and Temperal
 
-------------------
-```{r, echo=FALSE}
-library(tidyverse)
-library(spotifyr)
-remotes::install_github('jaburgoyne/compmus')
-library(compmus)
-
-#harp.quodlibet <-
-#  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>%
-#  select(segments) %>%
-#  unnest(segments) %>%
-#  select(start, duration, pitches)
-
-#piano.quodlibet <-
-#  get_tidy_audio_analysis("1k7VvBksJI73YT1avMdcnW") %>%
-#  select(segments) %>%
-#  unnest(segments) %>%
-#  select(start, duration, pitches)
-
-harp.quodlibet <-
-  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>% # Change URI.
-  compmus_align(beats, segments) %>%                     # Change `bars`
-  select(beats) %>%                                      #   in all three
-  unnest(beats) %>%                                      #   of these lines.
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  ) %>%
-  mutate(
-    timbre =
-      map(segments,
-        compmus_summarise, timbre,
-        method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  )
-
-#self-similarity matrix
-harp.quodlibet %>%
-  compmus_self_similarity(timbre, "cosine") %>% 
-  ggplot(
-    aes(
-      x = xstart + xduration / 2,
-      width = xduration,
-      y = ystart + yduration / 2,
-      height = yduration,
-      fill = d
-    )
-  ) +
-  geom_tile() +
-  coord_fixed() +
-  scale_fill_viridis_c(guide = "none") +
-  theme_classic() +
-  labs(x = "", y = "")
-```
 
 ```{r, echo=FALSE}
 library(tidyverse)
@@ -231,63 +174,8 @@ harp.quodlibet %>%
   theme_classic() +
   labs(x = "", y = "")
 ```
-------------------
-```{r, echo=FALSE}
-library(tidyverse)
-library(spotifyr)
-remotes::install_github('jaburgoyne/compmus')
-library(compmus)
 
-#harp.quodlibet <-
-#  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>%
-#  select(segments) %>%
-#  unnest(segments) %>%
-#  select(start, duration, pitches)
 
-#piano.quodlibet <-
-#  get_tidy_audio_analysis("1k7VvBksJI73YT1avMdcnW") %>%
-#  select(segments) %>%
-#  unnest(segments) %>%
-#  select(start, duration, pitches)
-
-harp.quodlibet <-
-  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>% # Change URI.
-  compmus_align(beats, segments) %>%                     # Change `bars`
-  select(beats) %>%                                      #   in all three
-  unnest(beats) %>%                                      #   of these lines.
-  mutate(
-    pitches =
-      map(segments,
-        compmus_summarise, pitches,
-        method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  ) %>%
-  mutate(
-    timbre =
-      map(segments,
-        compmus_summarise, timbre,
-        method = "rms", norm = "euclidean"              # Change summary & norm.
-      )
-  )
-
-#self-similarity matrix
-harp.quodlibet %>%
-  compmus_self_similarity(timbre, "cosine") %>% 
-  ggplot(
-    aes(
-      x = xstart + xduration / 2,
-      width = xduration,
-      y = ystart + yduration / 2,
-      height = yduration,
-      fill = d
-    )
-  ) +
-  geom_tile() +
-  coord_fixed() +
-  scale_fill_viridis_c(guide = "none") +
-  theme_classic() +
-  labs(x = "", y = "")
-```
 *** 
 Tuning has changed, therefore has to rearrange to the same key.
 
