@@ -12,9 +12,14 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 ### Background of Keyboard Instrument History
-Progress in musical style is often accompanied by improvement in the instrument itself. Many believe that the improvement of the harpsichord - a keyboard instrument - to the piano has greatly broadened the expressive power of keyboard music. The prevailing view is that the harpsichord cannot be adjusted for volume, has a single tone, and is so low that in modern times there is no longer a place for the harpsichord except in historical performance and in the performance of certain works with special requirements.
+Progress in musical style is often accompanied by improvement in the instrument itself. Many believe that the improvement of the harpsichord - a keyboard instrument - to the piano has greatly broadened the expressive power of keyboard music. The prevailing view is that the harpsichord cannot be adjusted for volume, has a single tone, and is so low that in modern times there is no longer a place for the harpsichord except in historical performance and in the performance of certain works with special requirements. This situation brings about another question: how to adapt harpsichord music to a more powerful, more expressive keyboard instrument like the piano?
 
-To take a closer look at  their differences and possible improvements by the piano, we have chosen to play the same piece on both instruments separately. We use the Goldberg Variations by J.S. Bach as a corpus.
+**Based on the background information about those two instruments, this storyboard aims to showcase how exactly pianists make adaptations to keyboard music that was originally written for harpsichords.**
+
+To take a closer look at  their differences and possible improvements by the piano, we have chosen to play the same piece on both instruments separately. We use the Goldberg Variations, one of the most renowned compositions by J.S. Bach, as a target of analysis, because this series of tunes have been played and recorded on a variety of keyboard instruments including the piano and the harpsichord. 
+
+For corpus, I select two albums about Goldberg Variations, one orchestrated by the piano and the other by the harpsichord. It is important to note that different musicians understand the original music script differently. Consequently, different versions might even deal with repetitions differently, causing great trouble when analyzing them with dynamic warping. That is why I choose two albums with the baseline condition that they share the same repetition pattern.
+
 
 ### Track-level Features: What do we usually expect from a harpsichord track and a piano track?
 
