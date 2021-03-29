@@ -17,24 +17,31 @@ Progress in musical style is often accompanied by improvement in the instrument 
 To take a closer look at  their differences and possible improvements by the piano, we have chosen to play the same piece on both instruments separately. We use the Goldberg Variations by J.S. Bach as a corpus.
 
 ### Track-level Features: What do we usually expect from a harpsichord track and a piano track?
-
+library(tidyverse)
+library(spotifyr)
 
 ### Chroma features: How tunings have changed the feeling of music
-
+library(tidyverse)
+library(spotifyr)
 
 ### Loudness: Are harpsichords really dumb at volume control?
-
+library(tidyverse)
+library(spotifyr)
 
 ### Timbre features: 
-
+library(tidyverse)
+library(spotifyr)
 
 ### Temporal features: Do harpsichord players do more rubato?
-
+library(tidyverse)
+library(spotifyr)
 
 ### Classification: How differently are harpsichord and piano tracks (of a same score) differently labelled?
-
+library(tidyverse)
+library(spotifyr)
 
 ### Clustering: Exploring the possibility of new insights
-
+library(tidyverse)
+library(spotifyr)
 
 ### Contribution: In summary, what are the differences?
