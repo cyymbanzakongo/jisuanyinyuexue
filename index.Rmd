@@ -5,7 +5,7 @@ date: "2/27/2021"
 output: 
   flexdashboard::flex_dashboard:
     storyboard: true
-
+    orientation: rows
 ---
 
 ```{r setup, include=FALSE}
@@ -101,6 +101,8 @@ awards %>%                    # Start with awards.
   )
 ```
 
+
+
 *** 
 
 This graph plots valence over energy. It is clearly visible that the harpsichord tracks cuddle in the right uppermost area of the graph, which means most of the harpsichord tracks of Goldberg Variations are identified as "energetic and cheerful" by Spotify, with little variance. The almost non-changing size of the dots symbolize the consistent loudness of harpsichords, just as expected.
@@ -113,51 +115,182 @@ Probably one of the only shared characteristic between the two versions is the p
 
 
 
-### Chroma features: How tunings have changed the feeling of music
+### Self-similarity matrix: Chroma, Timbre, and Temperal
+
+------------------
 ```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+remotes::install_github('jaburgoyne/compmus')
+library(compmus)
+
+#harp.quodlibet <-
+#  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>%
+#  select(segments) %>%
+#  unnest(segments) %>%
+#  select(start, duration, pitches)
+
+#piano.quodlibet <-
+#  get_tidy_audio_analysis("1k7VvBksJI73YT1avMdcnW") %>%
+#  select(segments) %>%
+#  unnest(segments) %>%
+#  select(start, duration, pitches)
+
+harp.quodlibet <-
+  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>% # Change URI.
+  compmus_align(beats, segments) %>%                     # Change `bars`
+  select(beats) %>%                                      #   in all three
+  unnest(beats) %>%                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+
+#self-similarity matrix
+harp.quodlibet %>%
+  compmus_self_similarity(timbre, "cosine") %>% 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
 ```
 
-
-
-*** 
-
-
-
-### Loudness: Are harpsichords really dumb at volume control?
 ```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+remotes::install_github('jaburgoyne/compmus')
+library(compmus)
+
+#harp.quodlibet <-
+#  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>%
+#  select(segments) %>%
+#  unnest(segments) %>%
+#  select(start, duration, pitches)
+
+#piano.quodlibet <-
+#  get_tidy_audio_analysis("1k7VvBksJI73YT1avMdcnW") %>%
+#  select(segments) %>%
+#  unnest(segments) %>%
+#  select(start, duration, pitches)
+
+harp.quodlibet <-
+  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>% # Change URI.
+  compmus_align(beats, segments) %>%                     # Change `bars`
+  select(beats) %>%                                      #   in all three
+  unnest(beats) %>%                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+
+#self-similarity matrix
+harp.quodlibet %>%
+  compmus_self_similarity(timbre, "cosine") %>% 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
 ```
-
-
-*** 
-
-Some commentary about Frame 1.
-
-
-### Timbre features: 
+------------------
 ```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+remotes::install_github('jaburgoyne/compmus')
+library(compmus)
+
+#harp.quodlibet <-
+#  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>%
+#  select(segments) %>%
+#  unnest(segments) %>%
+#  select(start, duration, pitches)
+
+#piano.quodlibet <-
+#  get_tidy_audio_analysis("1k7VvBksJI73YT1avMdcnW") %>%
+#  select(segments) %>%
+#  unnest(segments) %>%
+#  select(start, duration, pitches)
+
+harp.quodlibet <-
+  get_tidy_audio_analysis("01lNgvgbhIX3zOlizgL2ZJ") %>% # Change URI.
+  compmus_align(beats, segments) %>%                     # Change `bars`
+  select(beats) %>%                                      #   in all three
+  unnest(beats) %>%                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+
+#self-similarity matrix
+harp.quodlibet %>%
+  compmus_self_similarity(timbre, "cosine") %>% 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
 ```
-
 *** 
+Tuning has changed, therefore has to rearrange to the same key.
 
-Some commentary about Frame 1.
-
-
-
-### Temporal features: Do harpsichord players do more rubato?
-```{r, echo=FALSE}
-library(tidyverse)
-library(spotifyr)
-```
-
-*** 
-
-Some commentary about Frame 1.
 
 
 
