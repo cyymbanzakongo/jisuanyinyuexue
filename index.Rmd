@@ -17,31 +17,101 @@ Progress in musical style is often accompanied by improvement in the instrument 
 To take a closer look at  their differences and possible improvements by the piano, we have chosen to play the same piece on both instruments separately. We use the Goldberg Variations by J.S. Bach as a corpus.
 
 ### Track-level Features: What do we usually expect from a harpsichord track and a piano track?
+
+
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+
+grammy <- get_playlist_audio_features("", "4kQovkgBZTd8h2HCM3fF31")
+edison <- get_playlist_audio_features("", "37i9dQZF1DX8mnKbIkppDf")
+
+awards <-
+ bind_rows(
+    grammy %>% mutate(category = "Grammys"),
+    edison %>% mutate(category = "Edisons")
+  )
+
+grammy %>% ggplot(aes(x = energy)) + geom_histogram(binwidth = 0.1)
+```
+
+*** 
+
+Some commentary about Frame 1.
+
+
+
+
 
 ### Chroma features: How tunings have changed the feeling of music
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+```
+
+
+
+*** 
+
+Some commentary about Frame 1.
+
+
 
 ### Loudness: Are harpsichords really dumb at volume control?
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+```
+
+
+*** 
+
+Some commentary about Frame 1.
+
 
 ### Timbre features: 
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+```
+
+*** 
+
+Some commentary about Frame 1.
+
+
 
 ### Temporal features: Do harpsichord players do more rubato?
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+```
+
+*** 
+
+Some commentary about Frame 1.
+
+
 
 ### Classification: How differently are harpsichord and piano tracks (of a same score) differently labelled?
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+```
+*** 
+
+Some commentary about Frame 1.
+
 
 ### Clustering: Exploring the possibility of new insights
+```{r, echo=FALSE}
 library(tidyverse)
 library(spotifyr)
+```
+
+*** 
+
+Some commentary about Frame 1.
+
 
 ### Contribution: In summary, what are the differences?
