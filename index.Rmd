@@ -17,6 +17,8 @@ What can we do?<br>
     animals<br>
         just MEAT<br>
 
+Progress in musical style is often accompanied by progress in the instrument itself. Many believe that the improvement of the harpsichord - a keyboard instrument - to the piano has greatly broadened the expressive power of keyboard music. The prevailing view is that the harpsichord cannot be adjusted for volume, has a single tone, and is so low that in modern times there is no longer a place for the harpsichord except in historical performance and in the performance of certain works with special requirements.
+To verify this, we have chosen to play the same piece on both instruments separately. We use the Goldberg Variations by J.S. Bach as a corpus.
 
 ### Track-level Features: What do we usually expect from a harpsichord track and a piano track?
 
